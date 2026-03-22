@@ -1,4 +1,6 @@
 # Huffman-Coding
+## DEVELOPED BY : KAILASH PRABHU S
+## REG NO : 212224240068
 ## Aim
 To implement Huffman coding to compress the data using Python.
 
@@ -7,58 +9,79 @@ To implement Huffman coding to compress the data using Python.
 
 ## Algorithm:
 ### Step1:
-<br>
-
+Get the input string.
 
 ### Step2:
-<br>
+Create tree nodes.
 
 ### Step3:
-<br>
+Main function to implement huffman coding.
 
 ### Step4:
-<br>
+calculate frequency of occurence.
 
 ### Step5:
-<br>
-
+print the characters and its huffmancode.
  
 ## Program:
 
 ``` Python
 # Get the input String
+input_string = "KAILASH PRABHU S"
 
-
+# Calculate frequency of each character
+frequency = {}
+for char in input_string:
+    if char in frequency:
+        frequency[char] += 1
+    else:
+        frequency[char] = 1
 
 # Create tree nodes
+nodes = [[char, freq] for char, freq in frequency.items()]
 
+# Build Huffman Tree
+while len(nodes) > 1:
+    # Sort nodes based on frequency
+    nodes = sorted(nodes, key=lambda x: x[1])
 
+    # Pick two smallest nodes
+    left = nodes.pop(0)
+    right = nodes.pop(0)
 
-# Main function to implement huffman coding
+    # Create a new node with combined frequency
+    new_node = [[left, right], left[1] + right[1]]
 
+    # Add new node back to list
+    nodes.append(new_node)
 
+# Final tree
+huffman_tree = nodes[0]
 
-# Calculate frequency of occurrence
+# Generate Huffman Codes
+huffman_codes = {}
 
+def generate_codes(tree, code=""):
+    if isinstance(tree[0], str):  # Leaf node
+        huffman_codes[tree[0]] = code
+    else:
+        generate_codes(tree[0][0], code + "0")
+        generate_codes(tree[0][1], code + "1")
 
+generate_codes(huffman_tree)
 
-
-# Print the characters and its huffmancode
-
-
-
-
-
+# Print result
+print("Character | Huffman Code")
+print("-------------------------")
+for char, code in huffman_codes.items():
+    print(f"    {char}    |    {code}")
 ```
 ## Output:
 
 ### Print the characters and its huffmancode
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
+<img width="285" height="261" alt="image" src="https://github.com/user-attachments/assets/1e241d03-5f4a-463a-883b-c293ab12b577" />
+
 
 
 
